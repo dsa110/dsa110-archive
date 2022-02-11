@@ -1,3 +1,3 @@
 date,doi,file,intensity,duration
-2022-01-01,https://doi.org/10.12345/12345,https://data.caltech.edu,1.5,10.23
-2022-02-01,https://doi.org/10.12345/12345,https://data.caltech.edu,2.5,100.25
+2022-01-01,10.12345/12345,220203aaeg.png,1.5,10.23
+2022-02-01,10.12345/12345,220203aaeg.png,2.5,100.25
