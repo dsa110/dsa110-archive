@@ -1,0 +1,33 @@
+---
+title: "OVRO Data Events"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE,message=FALSE, cache=FALSE)
+```
+
+## Recent Data Events
+
+This a demonstration of a static site that lists OVRO events
+
+
+
+
+```{r data-table}
+library(tidyverse)
+library(DT)
+events <- read_csv('events.csv')
+events %>%
+  datatable(rownames = FALSE, 
+            colnames = c("Date", "DOI", "Data File", "Intensity", "Duration"),
+            class = "cell-border stripe", 
+            caption = "Events",
+            filter = list(position = "bottom"),
+            extensions = 'Buttons', options = list(dom = 'Bfrtip',
+            buttons = c('colvis', 'csv', 'pdf'))
+  )
+
+```
+
+You can customize everything around the table.
