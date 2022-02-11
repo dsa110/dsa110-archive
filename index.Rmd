@@ -18,8 +18,8 @@ This a demonstration of a static site that lists OVRO events
 library(tidyverse)
 library(DT)
 events <- read_csv('events.csv')
-events <- transform(events, doi = paste('<a href=https.doi.org/"',doi,'">',doi,'</a>'))
-events <- transform(events, file = paste('<a href=/images/"',file,'">',file,'</a>'))
+events <- transform(events, doi = paste('<a href=https://doi.org/',doi,'>',doi,'</a>',sep=""))
+events <- transform(events, file = paste('<a href=images/',file,'>',file,'</a>',sep=""))
 events %>%
   datatable(escape = FALSE,
             rownames = FALSE, 
