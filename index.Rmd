@@ -23,7 +23,7 @@ events <- transform(events, file = paste('<a href=images/',file,'>',file,'</a>',
 events %>%
   datatable(escape = FALSE,
             rownames = FALSE, 
-            colnames = c("Date", "Data Download", "Event Summary", "Intensity", "Duration"),
+            colnames = c("Internal Name","MJD","DM","Width","SNR","RA","Dec","RADecErr","Notes","doi","file"),
             class = "cell-border stripe", 
             caption = "Events",
             filter = list(position = "bottom"),
