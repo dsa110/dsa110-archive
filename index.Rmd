@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo=FALSE, warning=FALSE,message=FALSE, cache=FALSE)
 ```
 
-The [DSA-110](deepsynoptic.org) is a radio interferometer designed to discover and localize [Fast Radio Bursts](https://en.wikipedia.org/wiki/Fast_radio_burst). The project releases data publicly to support follow-up observations. This page summarizes high-quality, public data sets, including metadata for each event. A low-latency (60 second) alert system is also in development.
+The [DSA-110](https://deepsynoptic.org) is a radio interferometer designed to discover and localize [Fast Radio Bursts](https://en.wikipedia.org/wiki/Fast_radio_burst). The project releases data publicly to support follow-up observations. This page summarizes high-quality, public data sets, including metadata for each event. A low-latency (60 second) alert system is also in development.
 
 ## Event table
 
@@ -47,6 +47,6 @@ Column names:
 - Dec -- Declination (J2000) of peak of localization probability distribution in degrees.
 - PosErr -- Error on localization region in degrees.
 - Notes -- Human annotations describing the purpose of data set or associations, if known. Examples include: test, pulsar, or a name of a known source.
-- DOI -- Unique, persistent URL to public data set, which includes event localization region and dynamic spectrum. Data and DOI are managed by [CaltechDATA](data.caltech.edu).
+- DOI -- Unique, persistent URL to public data set, which includes event localization region and dynamic spectrum. Data and DOI are managed by [CaltechDATA](https://data.caltech.edu).
 - PNG file -- Summary plot showing event spectrum, localization, metadata.
 
