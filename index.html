@@ -1165,9 +1165,10 @@ var markInterval = function(d, digits, interval, mark, decMark, precision) {
   return xv.join(decMark);
 };
 
-DTWidget.formatCurrency = function(data, currency, digits, interval, mark, decMark, before) {
+DTWidget.formatCurrency = function(data, currency, digits, interval, mark, decMark, before, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   var res = markInterval(d, digits, interval, mark, decMark);
   res = before ? (/^-/.test(res) ? '-' + currency + res.replace(/^-/, '') : currency + res) :
     res + currency;
@@ -1180,21 +1181,24 @@ DTWidget.formatString = function(data, prefix, suffix) {
   return prefix + d + suffix;
 };
 
-DTWidget.formatPercentage = function(data, digits, interval, mark, decMark) {
+DTWidget.formatPercentage = function(data, digits, interval, mark, decMark, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   return markInterval(d * 100, digits, interval, mark, decMark) + '%';
 };
 
-DTWidget.formatRound = function(data, digits, interval, mark, decMark) {
+DTWidget.formatRound = function(data, digits, interval, mark, decMark, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   return markInterval(d, digits, interval, mark, decMark);
 };
 
-DTWidget.formatSignif = function(data, digits, interval, mark, decMark) {
+DTWidget.formatSignif = function(data, digits, interval, mark, decMark, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   return markInterval(d, digits, interval, mark, decMark, true);
 };
 
@@ -1214,6 +1218,55 @@ DTWidget.formatDate = function(data, method, params) {
 };
 
 window.DTWidget = DTWidget;
+
+// A helper function to update the lims of the existing filters
+var set_filter_lims = function(td, new_vals) {
+  // Based on the filter type, set its new values
+  if (['factor', 'logical'].includes(td.getAttribute('data-type'))) {
+    // Reformat the new dropdown options for use with selectize
+    new_vals = new_vals.map(function(item) {return {text: item, value: item}});
+
+    // Find the selectize object
+    var dropdown = $(td).find('.selectized').eq(0)[0].selectize;
+
+    // Note the current values
+    var old_vals = dropdown.getValue();
+
+    // Remove the existing values
+    dropdown.clearOptions();
+
+    // Add the new options
+    dropdown.addOption(new_vals);
+
+    // Preserve the existing values
+    dropdown.setValue(old_vals);
+
+  } else if (['number', 'integer', 'date', 'time'].includes(td.getAttribute('data-type'))) {
+    // Note what the new limits will be just for this filter
+    var new_lims = [...new_vals];
+
+    // Determine the current values and limits
+    var slider = $(td).find('.noUi-target').eq(0);
+    var old_vals = slider.val().map(Number);
+    var old_lims = slider.noUiSlider('options').range;
+    old_lims = [old_lims.min, old_lims.max];
+
+    // Preserve the current values if filters have been applied; otherwise, apply no filtering
+    if (old_vals[0] != old_lims[0]) {
+      new_vals[0] = Math.max(old_vals[0], new_vals[0]);
+    }
+
+    if (old_vals[1] != old_lims[1]) {
+      new_vals[1] = Math.min(old_vals[1], new_vals[1]);
+    }
+
+    // Update the endpoints of the slider
+    slider.noUiSlider({
+      start: new_vals,
+      range: {'min': new_lims[0], 'max': new_lims[1]}
+    }, true);
+  }
+};
 
 var transposeArray2D = function(a) {
   return a.length === 0 ? a : HTMLWidgets.transposeArray2D(a);
@@ -2510,6 +2563,20 @@ HTMLWidgets.widget({
       table.ajax.reload(null, resetPaging);
     }
 
+    // update table filters (set new limits of sliders)
+    methods.updateFilters = function(newLims) {
+      // loop through each filter in the filter row
+      filterRow.each(function(i, td) {
+        var k = i;
+        if (filterRow.length > newLims.length) {
+          if (i === 0) return;  // first column is row names
+          k = i - 1;
+        }
+        // Update the filters to reflect the updated data
+        set_filter_lims(td, newLims[k]);
+      });
+    };
+
     table.shinyMethods = methods;
   },
   resize: function(el, width, height, instance) {
@@ -2533,6 +2600,12 @@ HTMLWidgets.widget({
     var framingHeight = dtWrapper.innerHeight() - dtScrollBody.innerHeight();
     var scrollBodyHeight = availableHeight - framingHeight;
 
+    // we need to set `max-height` to none as datatables library now sets this
+    // to a fixed height, disabling the ability to resize to fill the window,
+    // as it will be set to a fixed 100px under such circumstances, e.g., RStudio IDE,
+    // or FlexDashboard
+    // see https://github.com/rstudio/DT/issues/951#issuecomment-1026464509
+    dtScrollBody.css('max-height', 'none');
     // set the height
     dtScrollBody.height(scrollBodyHeight + 'px');
   },
@@ -53389,6 +53462,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -53409,6 +53483,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -53497,11 +53574,11 @@ pre code {
 </div>
 
 
-<p>The <a href="deepsynoptic.org">DSA-110</a> is a radio interferometer designed to discover and localize <a href="https://en.wikipedia.org/wiki/Fast_radio_burst">Fast Radio Bursts</a>. The project releases data publicly to support follow-up observations. This page summarizes high-quality, public data sets, including metadata for each event. A low-latency (60 second) alert system is also in development.</p>
+<p>The <a href="https://deepsynoptic.org">DSA-110</a> is a radio interferometer designed to discover and localize <a href="https://en.wikipedia.org/wiki/Fast_radio_burst">Fast Radio Bursts</a>. The project releases data publicly to support follow-up observations. This page summarizes high-quality, public data sets, including metadata for each event. A low-latency (60 second) alert system is also in development.</p>
 <div id="event-table" class="section level2">
 <h2>Event table</h2>
-<div id="htmlwidget-c4d96b9f6ba4f2c83cc9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c4d96b9f6ba4f2c83cc9">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"caption":"<caption>Events<\/caption>","data":[["1"],["220203aaeg"],[59436.5996974869],[29.0454],[1.048576],[9.03739],[0],[0],[1],["test"],["<a href=https://doi.org/10.22013/f39h-wv44>10.22013/f39h-wv44<\/a>"],["<a href=images/220203aaeg.png>220203aaeg.png<\/a>"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Internal Name<\/th>\n      <th>MJD<\/th>\n      <th>DM<\/th>\n      <th>Width<\/th>\n      <th>SNR<\/th>\n      <th>RA<\/th>\n      <th>Dec<\/th>\n      <th>PosErr<\/th>\n      <th>Notes<\/th>\n      <th>DOI<\/th>\n      <th>PNG file<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["colvis","csv","pdf"],"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a0d99398dbebc4f7d28c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a0d99398dbebc4f7d28c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"caption":"<caption>Events<\/caption>","data":[["1"],["220203aaeg"],[59436.5996974869],[29.0454],[1.048576],[9.03739],[0],[0],[1],["test"],["<a href=https://doi.org/10.22013/f39h-wv44>10.22013/f39h-wv44<\/a>"],["<a href=images/220203aaeg.png>220203aaeg.png<\/a>"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Internal Name<\/th>\n      <th>MJD<\/th>\n      <th>DM<\/th>\n      <th>Width<\/th>\n      <th>SNR<\/th>\n      <th>RA<\/th>\n      <th>Dec<\/th>\n      <th>PosErr<\/th>\n      <th>Notes<\/th>\n      <th>DOI<\/th>\n      <th>PNG file<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["colvis","csv","pdf"],"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p>Click on the “PNG file” link to view the candidate summary plot and “DOI” to access the full data release. The search field will filter the table by running a string query on all fields.</p>
 <p>Column names:</p>
 <ul>
@@ -53514,7 +53591,7 @@ pre code {
 <li>Dec – Declination (J2000) of peak of localization probability distribution in degrees.</li>
 <li>PosErr – Error on localization region in degrees.</li>
 <li>Notes – Human annotations describing the purpose of data set or associations, if known. Examples include: test, pulsar, or a name of a known source.</li>
-<li>DOI – Unique, persistent URL to public data set, which includes event localization region and dynamic spectrum. Data and DOI are managed by <a href="data.caltech.edu">CaltechDATA</a>.</li>
+<li>DOI – Unique, persistent URL to public data set, which includes event localization region and dynamic spectrum. Data and DOI are managed by <a href="https://data.caltech.edu">CaltechDATA</a>.</li>
 <li>PNG file – Summary plot showing event spectrum, localization, metadata.</li>
 </ul>
 </div>
