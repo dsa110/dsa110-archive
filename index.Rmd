@@ -44,7 +44,7 @@ Column names:
 - SNR -- Signal-to-noise-ratio of event measured in a single power beam as a function of time (using Heimdall search code)
 - RA -- Right Ascencion (J2000) of peak of localization probability distribution in degrees.
 - Dec -- Declination (J2000) of peak of localization probability distribution in degrees.
-- PosErr -- Error on localization region in arcseconds.
+- PosErr -- Error full-width at half-max of the localization region in units of arcseconds (largest of two axes). The 90\% error ellipse is 2.15 times larger than the value quoted here.
 - Notes -- Human annotations describing the purpose of data set or associations, if known. Examples include: test, pulsar, or a name of a known source.
 - Version -- Release version of data. Ad hoc releases are <1.0. Full release is versioned 1.0. Minor increments do not affect science interpretation, but major increments do.
 - DOI -- Unique, persistent URL to public data set, which includes event localization region and dynamic spectrum. Data and DOI are managed by [CaltechDATA](https://data.caltech.edu).
