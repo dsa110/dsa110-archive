@@ -4,7 +4,7 @@ output:
   html_document:
     theme: cosmo
     include:
-      before_body: static/analytics.html
+      in_header: static/analytics.html
       after_body: static/footer.html
 ---
 
