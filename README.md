@@ -1,10 +1,10 @@
 OVRO Demo
 =====================================================
 
-A demo data portal for OVRO
+A demo data portal, which includes a simple table with data and links to CaltechDATA.
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://choosealicense.com/licenses/bsd-3-clause)
-[![Latest release](https://img.shields.io/github/v/release/caltechlibrary/template.svg?style=flat-square&color=b44e88)](https://github.com/caltechlibrary/template/releases)
+[![Latest release](https://img.shields.io/github/v/release/caltechlibrary/OVRO-demo.svg?style=flat-square&color=b44e88)](https://github.com/caltechlibrary/OVRO-demo/releases)
 
 
 Table of contents
