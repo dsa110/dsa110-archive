@@ -1,10 +1,16 @@
-
-cff-version: 1.1.0
+cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-authors:
-   - family-names: Morrell
-     given-names: Thomas E.
-     orcid: https://orcid.org/0000-0001-9266-5146
-version: 0.0.1
 title: OVRO demo
+authors:
+  - family-names: Morrell
+    given-names: Thomas E.
+    orcid: https://orcid.org/0000-0001-9266-5146
+abstract: Demo of a static data portal for OVRO
+repository-code: "https://github.com/caltechlibrary/ovro-demo"
+type: software
+version: 0.0.1
+license-url: "https://github.com/caltechlibrary/ovro-demo/blob/main/LICENSE"
+keywords:
+  - ovro-demo
+  - software
 date-released: 2022-02-11

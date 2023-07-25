@@ -5,7 +5,10 @@
         {
             "@id": "https://orcid.org/0000-0001-9266-5146",
             "@type": "Person",
-            "affiliation": "Caltech Library",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Caltech Library"
+            },
             "familyName": "Morrell",
             "givenName": "Thomas E."
         }
@@ -23,5 +26,16 @@
     "name": "OVRO demo",
     "description": "Demo of a static data portal for OVRO",
     "version": "0.0.1",
-    "maintainer": "https://orcid.org/0000-0001-9105-5960"
+    "maintainer": [
+    {
+      "@id": "https://orcid.org/0000-0001-9266-5146",
+      "@type": "Person",
+      "affiliation": {
+                "@type": "Organization",
+                "name": "Caltech Library"
+            },
+      "familyName": "Morrell",
+      "givenName": "Thomas E."
+    }
+  ]
 }
