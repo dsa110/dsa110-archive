@@ -1,16 +1,19 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: OVRO demo
+title: DSA-110 Event Archive
 authors:
   - family-names: Morrell
     given-names: Thomas E.
     orcid: https://orcid.org/0000-0001-9266-5146
-abstract: Demo of a static data portal for OVRO
-repository-code: "https://github.com/caltechlibrary/ovro-demo"
+  - family-names: Law
+    given-names: Casey J.
+    orcid: https://orcid.org/0000-0002-4119-9963
+abstract: A data portal for events detected by the Deep Synoptic Array 110
+repository-code: "https://github.com/dsa110/dsa110-archive"
 type: software
 version: 0.0.1
-license-url: "https://github.com/caltechlibrary/ovro-demo/blob/main/LICENSE"
+license-url: "https://github.com/dsa110/dsa110-archive/blob/main/LICENSE"
 keywords:
-  - ovro-demo
+  - dsa-110
   - software
 date-released: 2022-02-11
