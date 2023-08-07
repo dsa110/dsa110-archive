@@ -1,0 +1,247 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fmodern\fcharset0 Courier-Bold;\f2\fmodern\fcharset0 Courier-Oblique;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww14080\viewh17440\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 \
+\
+#DSA-110 FRB Repository ReadMe File\
+\
+This file contains information for the DSA-110 FRB repository hosted on CaltechDATA (https://data.caltech.edu/). There are 6 files contained in this repository; for an FRB with internal candidate name 
+\f1\b yymmdd**** 
+\f0\b0 , the files are as follows:\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b \cf2 \ul \ulc2 yymmdd****.png: 
+\f0\b0 \ulnone Summary plot for the FRB candidate. The header provides the following parameters:\
+\
+	
+\f2\i candname: 
+\f0\i0 internal candidate name for the FRB\
+	
+\f2\i DM
+\f0\i0 :
+\f2\i  
+\f0\i0 initial DM detection reported by the Heimdall search software in pc/cc\
+	
+\f2\i boxcar
+\f0\i0 : the approximate pulse width in 256 microsecond samples\
+	i
+\f2\i beam: 
+\f0\i0 the beam (from 0 to 255) in which the FRB was detected \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 	
+\f2\i MJD: 
+\f0\i0 Mean Julian Date in the J2000 epoch\
+	
+\f2\i Ra/Dec: 
+\f0\i0 right ascension and declination of the detected beam in degrees\
+	
+\f2\i Gal lon/lat: 
+\f0\i0 galactic longitude and latitude of the detected beam in degrees\
+\
+ 6 plots are displayed in the png file:\
+	\
+	
+\f2\i upper left: 
+\f0\i0 De-dispersed dynamic spectrum\
+	
+\f2\i upper right: 
+\f0\i0 De-dispersion transform\
+	
+\f2\i middle left: 
+\f0\i0 Frequency-averaged time series in a 200 ms window around the burst\
+	
+\f2\i middle right: 
+\f0\i0 Intensity as a function of beam number versus time\
+	
+\f2\i bottom left: 
+\f0\i0 \
+	
+\f2\i bottom right: 
+\f0\i0 Initial coarse localization plot at the synthesized beam width resolution\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b \cf2 \ul \ulc2 yymmdd****_dev_polcal_%.fil:\ulnone  
+\f0\b0 Polarization calibrated filterbank, where % is either of 
+\f1\b I,Q,U,or V 
+\f0\b0 corresponding to the four stokes parameters. Details of the calibration can be found in Sherman et al., 2023a. Each filter bank contains data in arbitrary units (normalized by the off-pulse RMS in each channel) at native resolution 
+\f1\b (32.7 microsecond, 30.5 kHz)
+\f0\b0 . 32 bit floating point data is used, and each filter bank array is a size 
+\f1\b 20480 time samples x 6144 frequency channels
+\f0\b0  2D array. Descriptions for the parameters in the header file are offered at 
+\f1\b https://sigpyproc3.readthedocs.io/en/latest/api/header.html#sigpyproc.header.Header
+\f0\b0 , and further information about interfacing with filterbank files with Sigpyproc can be found at 
+\f1\b https://sigpyproc3.readthedocs.io/en/latest/.
+\f0\b0  The following parameters are unique to these filter bank files and therefore not included in the documentation, along with their standard values:
+\f1\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b0 \cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+	
+\f2\i filelen
+\f0\i0 : 503316768, size of the file in bytes\
+ 	
+\f2\i nbytes
+\f0\i0 : 503316480, size of the file in bytes\
+ 	
+\f2\i basename
+\f0\i0 : path to filter bank file without extension,\
+ 	
+\f2\i datalens
+\f0\i0 : [503316480],\
+ 	
+\f2\i extension
+\f0\i0 : '.fil',\
+ 	
+\f2\i bandwidth
+\f0\i0 : 187.49999996928, total observation bandwidth \
+ 	
+\f2\i ftop
+\f0\i0 : 1498.76525878906, maximum frequency channel in MHz\
+ 	
+\f2\i fbottom
+\f0\i0 : 1311.26525881978, minimum frequency channel in MHz\
+ 	
+\f2\i fcenter
+\f0\i0 : 1405.01525880442, center frequency channel in MHz\
+ 	
+\f2\i tobs
+\f0\i0 : 0.67108864, total observation time in seconds\
+ 	
+\f2\i obs_date
+\f0\i0 : date of observation in dd/mm/yyyy format\
+ 	
+\f2\i obs_time
+\f0\i0 : start \'92time of observation in hh:mm:ss format \
+	
+\f2\i dtype
+\f0\i0 : dtype('float32\'92), data size\
+\
+The following keys are unused, either because they are irrelevant, or because they are reported elsewhere. Some of these keys are still within the header with arbitrary values; these should be disregarded:\
+\
+	
+\f2\i coord
+\f0\i0 \
+	
+\f2\i zenith
+\f0\i0 \
+	
+\f2\i frame
+\f0\i0 \
+	
+\f2\i ibeam
+\f0\i0 \
+	
+\f2\i nbeams
+\f0\i0 \
+	
+\f2\i dm
+\f0\i0 \
+	
+\f2\i period
+\f0\i0 \
+	
+\f2\i accel
+\f0\i0 \
+	
+\f2\i signed
+\f0\i0 \
+	
+\f2\i rawdatafile
+\f0\i0 \
+	
+\f2\i hdrlens
+\f0\i0 \
+	
+\f2\i datalens
+\f0\i0 \
+	
+\f2\i ra
+\f0\i0 \
+	
+\f2\i dec
+\f0\i0 \
+	
+\f2\i ra_rad
+\f0\i0 \
+	
+\f2\i dec_rad
+\f0\i0 \
+	
+\f2\i src_raj
+\f0\i0 \
+	
+\f2\i src_decj
+\f0\i0 \
+	
+\f2\i machine_id
+\f0\i0 \
+\
+Filterbank files can be accessed through standard means, e.g. with Sigpyproc. If needed, functions for interfacing with the stokes filter bank files using Python3 are provided in the 
+\f1\b dsa110-pol 
+\f0\b0 library (
+\f1\b https://github.com/dsa110/dsa110-pol/tree/main
+\f0\b0 ). Details of the required dependencies and use are found on the Github page. To read in the filter bank data into 2D numpy arrays, the following code snippet is provided:\
+\
+from dsapol import dsapol\
+\
+datadir = \'93path_to_filterbank_directory/\'93\
+candname = \'93
+\f1\b \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 yymmdd****\'94 #candidate name for FRB\
+Filename = candname + \'93_dev\'94\
+nsamps = 20480 #number of time samples to read\
+
+\f0\b0 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 n_t = 1 #factor by which to downsample data in time, if needed\
+n_f = 1 #factor by which to downsample data in frequency, if needed\
+n_off = int(12000//n_t) #upper sample index used to estimate the off-pulse mean; only needed if sub_offpulse_mean = True\
+sub_offpulse_mean = False #normalize data by subtracting the off-pulse mean and dividing by the off-pulse RMS \
+fixchans = False #mask any channels with bad data\
+alpha = True #must be true to read correct files\
+\
+(I,Q,U,V,fobj,timeaxis,freq_test,wav_test) = dsapol.get_stokes_2D(datadir,filename,nsamples,n_t=n_t,n_f=n_f,n_off=n_off,sub_offpulse_mean= \cb3 \outl0\strokewidth0 sub_offpulse_mean\cb3 \outl0\strokewidth0 \strokec2 ,fixchans= \cb3 \outl0\strokewidth0 fixchans\cb3 \outl0\strokewidth0 \strokec2 ,alpha=alpha)\
+\
+\
+# I,Q,U,V are 2D arrays containing the stokes filter bank data\
+# fobj is the filterbank object; access header data with fobj.header\
+# timeaxis is a 1D array of time steps at the sampling time x n_t\
+# freq_test is a list of 1D arrays; each array contains the center frequencies of each frequency channel\
+# wav_test \cb3 \outl0\strokewidth0 is a list of 1D arrays; each array contains the center wavelength of each frequency channel\cb3 \outl0\strokewidth0 \strokec2 \
+\
+\
+
+\f1\b \ul yymmdd****_RMTable.fits\ulnone : 
+\f0\b0 Fits file containing table of derived polarization parameters for the FRB in RMTable format. The RMTable format is standard, defined in detail in Van Eck et al., 2023. Code for reading and editing the RMTable can be found at 
+\f1\b https://github.com/CIRADA-Tools/RMTable, 
+\f0\b0 along with usage details. Each table contains the derived parameters for each FRB sub-component (labelled in the \'91
+\f1\b PeakNum
+\f0\b0 \'92 column 0,1,2,\'85) and for the full burst (labelled in the \'91PeakNum\'92 column as -1). Note that some additional columns have been appended to the standard set; descriptions of these columns and their units can be accessed as 
+\f1\b rmtable[\'91column_name\'92].description
+\f0\b0  and 
+\f1\b \cb3 \outl0\strokewidth0 rmtable[\'91column_name\'92].units. 
+\f0\b0 Note that the 
+\f1\b \'92stokesQ\'92, \'92stokesQ_err\'92, \cf2 \'92stokesU\'92, \'92stokesU_err\'92\cf2 , \'91stokesV\'92, 
+\f0\b0 and 
+\f1\b \'91stokesV_err\'92 
+\f0\b0 fields are unused , as average stokes parameters are misleading for transient phenomena. Instead, linear, circular, and total polarization fractions are provided in the columns \'91
+\f1\b Lfracpol\'92, \'91Vfracpol\'92, \'91absVfracpol\'92, 
+\f0\b0 and
+\f1\b  \'92Tfracpol\'92.\
+\
+
+\f0\b0 For further information, please refer to the original DSA Polarization papers. \
+\
+**put the citations here once there submitted**
+\fs28 \cf0 \cb3 \outl0\strokewidth0 \strokec2 \
+\
+}
