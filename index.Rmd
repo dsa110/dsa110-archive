@@ -21,6 +21,7 @@ library(tidyverse)
 library(DT)
 events <- read_csv('events.csv')
 events <- transform(events, doi = paste('<a href=https://doi.org/',doi,'>',doi,'</a>',sep=""))
+events <- transform(events, publication = paste('<a href=https://ui.adsabs.harvard.edu/abs/',publication,'>',publication,'</a>',sep=""))
 events %>%
   datatable(escape = FALSE,
             rownames = TRUE, 
@@ -28,8 +29,10 @@ events %>%
             class = "cell-border stripe", 
             caption = "Events",
 #            filter = list(position = "bottom"),
-            extensions = 'Buttons', options = list(dom = 'Bfrtip',
-            buttons = c('colvis', 'csv', 'pdf'))
+            extensions = 'Buttons',
+	    options = list(dom = 'Bfrtip',
+            	    buttons = c('colvis', 'csv', 'pdf'),
+		    (columnDefs = list(list(visible=FALSE, targets=c('Width','Publication')))))
   )
 
 ```
