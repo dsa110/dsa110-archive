@@ -32,7 +32,7 @@ events %>%
             extensions = 'Buttons',
 	    options = list(dom = 'Bfrtip',
             	    buttons = c('colvis', 'csv', 'pdf'),
-		    (columnDefs = list(list(visible=FALSE, targets=c('Width','Publication')))))
+		    columnDefs = list(list(visible=FALSE, targets=c('Width','Publication'))))
   )
 
 ```
