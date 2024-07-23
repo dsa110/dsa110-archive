@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(echo=FALSE, warning=FALSE,message=FALSE, cache=FALSE)
 ```
 
-The [DSA-110](https://deepsynoptic.org) is a radio interferometer designed to discover and localize [Fast Radio Bursts](https://en.wikipedia.org/wiki/Fast_radio_burst). The project releases data publicly to support follow-up observations. This page summarizes high-quality, public data sets, including metadata for each event. A low-latency (60 second) alert system is also in development.
+The [DSA-110](https://deepsynoptic.org) is a radio interferometer designed to discover and localize [Fast Radio Bursts](https://en.wikipedia.org/wiki/Fast_radio_burst). The project releases data publicly to support follow-up observations and analysis. This archive is the gateway to public DSA-110 data. A low-latency alert system is separately available via the VOEvent standard.
 
 ## Event table
 
@@ -24,7 +24,7 @@ events <- transform(events, doi = paste('<a href=https://doi.org/',doi,'>',doi,'
 events %>%
   datatable(escape = FALSE,
             rownames = TRUE, 
-            colnames = c("Internal Name","MJD","DM","Width","SNR","RA","Dec","PosErr","Notes","Version","DOI"),
+            colnames = c("Internal Name","MJD","DM","Width","SNR","RA","Dec","PosErr","Notes","Version","DOI", "Publication"),
             class = "cell-border stripe", 
             caption = "Events",
 #            filter = list(position = "bottom"),
@@ -34,7 +34,7 @@ events %>%
 
 ```
 
-Click on the "DOI" link to view the candidate data, including a summary plot. A description of the data released at each DOI can be found in the [data README](data.rtf). The search field will filter the table by running a string query on all fields. A list of official names for DSA-110 FRBs can also be found on the [Transient Name Server](https://www.wis-tns.org/search?&discovered_period_value=&discovered_period_units=months&unclassified_at=0&classified_sne=0&include_frb=1&name=&name_like=0&isTNS_AT=all&public=all&ra=&decl=&radius=&coords_unit=arcsec&reporting_groupid%5B%5D=132&groupid%5B%5D=null&classifier_groupid%5B%5D=null&objtype%5B%5D=null&at_type%5B%5D=5&date_start%5Bdate%5D=&date_end%5Bdate%5D=&discovery_mag_min=&discovery_mag_max=&internal_name=&discoverer=&classifier=&spectra_count=&redshift_min=&redshift_max=&hostname=&ext_catid=&ra_range_min=&ra_range_max=&decl_range_min=&decl_range_max=&discovery_instrument%5B%5D=null&classification_instrument%5B%5D=null&associated_groups%5B%5D=null&official_discovery=0&official_classification=0&at_rep_remarks=&class_rep_remarks=&frb_repeat=all&frb_repeater_of_objid=&frb_measured_redshift=0&frb_dm_range_min=&frb_dm_range_max=&frb_rm_range_min=&frb_rm_range_max=&frb_snr_range_min=&frb_snr_range_max=&frb_flux_range_min=&frb_flux_range_max=&num_page=50&display%5Bredshift%5D=1&display%5Bhostname%5D=1&display%5Bhost_redshift%5D=1&display%5Bsource_group_name%5D=1&display%5Bclassifying_source_group_name%5D=1&display%5Bdiscovering_instrument_name%5D=0&display%5Bclassifing_instrument_name%5D=0&display%5Bprograms_name%5D=0&display%5Binternal_name%5D=1&display%5BisTNS_AT%5D=0&display%5Bpublic%5D=1&display%5Bend_pop_period%5D=0&display%5Bspectra_count%5D=1&display%5Bdiscoverymag%5D=1&display%5Bdiscmagfilter%5D=1&display%5Bdiscoverydate%5D=1&display%5Bdiscoverer%5D=1&display%5Bremarks%5D=0&display%5Bsources%5D=0&display%5Bbibcode%5D=0&display%5Bext_catalogs%5D=0).
+The "DOI" link will go to a page with public data for the FRB. A description of the data released at each DOI can be found in the [data README](data.rtf). Use the search field to filter the table by string query on all fields. A list of official names for DSA-110 FRBs can also be found on the [Transient Name Server](https://www.wis-tns.org/search?&discovered_period_value=&discovered_period_units=months&unclassified_at=0&classified_sne=0&include_frb=1&name=&name_like=0&isTNS_AT=all&public=all&ra=&decl=&radius=&coords_unit=arcsec&reporting_groupid%5B%5D=132&groupid%5B%5D=null&classifier_groupid%5B%5D=null&objtype%5B%5D=null&at_type%5B%5D=5&date_start%5Bdate%5D=&date_end%5Bdate%5D=&discovery_mag_min=&discovery_mag_max=&internal_name=&discoverer=&classifier=&spectra_count=&redshift_min=&redshift_max=&hostname=&ext_catid=&ra_range_min=&ra_range_max=&decl_range_min=&decl_range_max=&discovery_instrument%5B%5D=null&classification_instrument%5B%5D=null&associated_groups%5B%5D=null&official_discovery=0&official_classification=0&at_rep_remarks=&class_rep_remarks=&frb_repeat=all&frb_repeater_of_objid=&frb_measured_redshift=0&frb_dm_range_min=&frb_dm_range_max=&frb_rm_range_min=&frb_rm_range_max=&frb_snr_range_min=&frb_snr_range_max=&frb_flux_range_min=&frb_flux_range_max=&num_page=50&display%5Bredshift%5D=1&display%5Bhostname%5D=1&display%5Bhost_redshift%5D=1&display%5Bsource_group_name%5D=1&display%5Bclassifying_source_group_name%5D=1&display%5Bdiscovering_instrument_name%5D=0&display%5Bclassifing_instrument_name%5D=0&display%5Bprograms_name%5D=0&display%5Binternal_name%5D=1&display%5BisTNS_AT%5D=0&display%5Bpublic%5D=1&display%5Bend_pop_period%5D=0&display%5Bspectra_count%5D=1&display%5Bdiscoverymag%5D=1&display%5Bdiscmagfilter%5D=1&display%5Bdiscoverydate%5D=1&display%5Bdiscoverer%5D=1&display%5Bremarks%5D=0&display%5Bsources%5D=0&display%5Bbibcode%5D=0&display%5Bext_catalogs%5D=0).
  
 Column names:
 
@@ -47,6 +47,7 @@ Column names:
 - Dec -- Declination (J2000) of peak of localization probability distribution in degrees.
 - PosErr -- Error full-width at half-max of the localization region in units of arcseconds (largest of two axes). The 90\% error ellipse is 2.15 times larger than the value quoted here.
 - Notes -- Human annotations describing the purpose of data set or associations, if known. Examples include: test, pulsar, or a name of a known source.
-- Version -- Release version of data. Ad hoc releases are <1.0. Full release is versioned 1.0. Minor increments do not affect science interpretation, but major increments do.
+- Version -- Release version of data. Ad hoc releases are <1.0. Version >=2.0 include filterbank files. Minor increments do not affect science interpretation, but major increments do.
 - DOI -- Unique, persistent URL to public data set, which includes event localization region and dynamic spectrum. Data and DOI are managed by [CaltechDATA](https://data.caltech.edu).
+- Publication -- A link to the ADS entry for the first refereed publication that includes the FRB.
 
