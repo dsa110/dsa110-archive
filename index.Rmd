@@ -21,7 +21,10 @@ library(tidyverse)
 library(DT)
 events <- read_csv('events.csv')
 events <- transform(events, doi = paste('<a href=https://doi.org/',doi,'>',doi,'</a>',sep=""))
-events <- transform(events, Publication = ifelse( Publication != "", paste('<a href=https://ui.adsabs.harvard.edu/abs/',Publication,'>',Publication,'</a>',sep="")), "" )
+events <- transform(events, 
+                    Publication = ifelse(Publication != "", 
+                                         paste('<a href=https://ui.adsabs.harvard.edu/abs/', Publication, '>', Publication, '</a>', sep=""), 
+                                         ""))
 events %>%
   datatable(escape = FALSE,
             rownames = TRUE, 
