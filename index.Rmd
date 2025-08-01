@@ -28,7 +28,7 @@ events <- transform(events,
 events %>%
   datatable(escape = FALSE,
             rownames = TRUE, 
-            colnames = c("Internal Name","MJD","DM","Width","SNR","RA","Dec","PosErr","Notes","Version","DOI", "Publication"),
+            colnames = c("Internal Name","MJD","DM","Width","SNR","RA","Dec","PosErr","Notes","Version","DOI", "First Publication"),
             class = "cell-border stripe", 
             caption = "Events",
 #            filter = list(position = "bottom"),
